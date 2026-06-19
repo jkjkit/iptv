@@ -1,63 +1,63 @@
 [
   {
     "extinf": "#EXTINF:-1 tvg-name=\"cctv1\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/CCTV1.png\" group-title=\"央视\",CCTV1",
-    "match": ["CCTV1", "CCTV-1"]
+    "match": ["CCTV1", "CCTV-1", "608807420"]
   },
   {
     "extinf": "#EXTINF:-1 tvg-name=\"cctv2\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/CCTV2.png\" group-title=\"央视\",CCTV2",
-    "match": ["CCTV2", "CCTV-2"]
+    "match": ["CCTV2", "CCTV-2", "631780532"]
   },
   {
     "extinf": "#EXTINF:-1 tvg-name=\"cctv3\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/CCTV3.png\" group-title=\"央视\",CCTV3",
-    "match": ["CCTV3", "CCTV-3"]
+    "match": ["CCTV3", "CCTV-3", "624878271"]
   },
   {
     "extinf": "#EXTINF:-1 tvg-name=\"cctv4\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/CCTV4.png\" group-title=\"央视\",CCTV4",
-    "match": ["CCTV4", "CCTV-4"]
+    "match": ["CCTV4", "CCTV-4", "631780421"]
   },
   {
     "extinf": "#EXTINF:-1 tvg-name=\"cctv5\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/CCTV5.png\" group-title=\"央视\",CCTV5",
-    "match": ["CCTV5", "CCTV-5"]
+    "match": ["CCTV5", "CCTV-5", "641886683"]
   },
   {
     "extinf": "#EXTINF:-1 tvg-name=\"cctv6\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/CCTV6.png\" group-title=\"央视\",CCTV6",
-    "match": ["CCTV6", "CCTV-6"]
+    "match": ["CCTV6", "CCTV-6", "624878396"]
   },
   {
     "extinf": "#EXTINF:-1 tvg-name=\"cctv7\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/CCTV7.png\" group-title=\"央视\",CCTV7",
-    "match": ["CCTV7", "CCTV-7"]
+    "match": ["CCTV7", "CCTV-7", "673168121"]
   },
   {
     "extinf": "#EXTINF:-1 tvg-name=\"cctv8\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/CCTV8.png\" group-title=\"央视\",CCTV8",
-    "match": ["CCTV8", "CCTV-8"]
+    "match": ["CCTV8", "CCTV-8", "624878356"]
   },
   {
     "extinf": "#EXTINF:-1 tvg-name=\"cctv9\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/CCTV9.png\" group-title=\"央视\",CCTV9",
-    "match": ["CCTV9", "CCTV-9"]
+    "match": ["CCTV9", "CCTV-9", "673168140"]
   },
   {
     "extinf": "#EXTINF:-1 tvg-name=\"cctv10\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/CCTV10.png\" group-title=\"央视\",CCTV10",
-    "match": ["CCTV10", "CCTV-10"]
+    "match": ["CCTV10", "CCTV-10", "624878405"]
   },
   {
     "extinf": "#EXTINF:-1 tvg-name=\"cctv11\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/CCTV11.png\" group-title=\"央视\",CCTV11",
-    "match": ["CCTV11", "CCTV-11"]
+    "match": ["CCTV11", "CCTV-11", "667987558"]
   },
   {
     "extinf": "#EXTINF:-1 tvg-name=\"cctv12\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/CCTV12.png\" group-title=\"央视\",CCTV12",
-    "match": ["CCTV12", "CCTV-12"]
+    "match": ["CCTV12", "CCTV-12", "673168185"]
   },
   {
     "extinf": "#EXTINF:-1 tvg-name=\"cctv13\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/CCTV13.png\" group-title=\"央视\",CCTV13",
-    "match": ["CCTV13", "CCTV-13"]
+    "match": ["CCTV13", "CCTV-13", "608807423"]
   },
   {
     "extinf": "#EXTINF:-1 tvg-name=\"cctv14\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/CCTV14.png\" group-title=\"央视\",CCTV14",
-    "match": ["CCTV14", "CCTV-14"]
+    "match": ["CCTV14", "CCTV-14", "624878440"]
   },
   {
     "extinf": "#EXTINF:-1 tvg-name=\"cctv15\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/CCTV15.png\" group-title=\"央视\",CCTV15",
-    "match": ["CCTV15", "CCTV-15"]
+    "match": ["CCTV15", "CCTV-15", "673168223"]
   },
   {
     "extinf": "#EXTINF:-1 tvg-name=\"cctv16\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/CCTV16.png\" group-title=\"央视\",CCTV16",
@@ -65,33 +65,13 @@
   },
   {
     "extinf": "#EXTINF:-1 tvg-name=\"cctv17\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/CCTV17.png\" group-title=\"央视\",CCTV17",
-    "match": ["CCTV17", "CCTV-17"]
+    "match": ["CCTV17", "CCTV-17", "673168256"]
   },
   {
     "extinf": "#EXTINF:-1 tvg-name=\"cctv5+\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/CCTV5plus.png\" group-title=\"央视\",CCTV5+",
-    "match": ["CCTV5+", "CCTV-5+", "CCTV5PLUS"]
+    "match": ["CCTV5+", "CCTV-5+", "CCTV5PLUS", "641886773"]
   },
 
-  {
-    "extinf": "#EXTINF:-1 tvg-name=\"翡翠台\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/TVB1.png\" group-title=\"卫视\",TVB翡翠台",
-    "match": ["翡翠台", "TVB翡翠台", "TVB"]
-  },
-  {
-    "extinf": "#EXTINF:-1 tvg-name=\"娱乐台\" tvg-logo=\"https://logo.catvod.com/娱乐新闻台.png\" group-title=\"卫视\",TVB娱乐台",
-    "match": ["娱乐台", "TVB娱乐台", "娱乐新闻台"]
-  },
-  {
-    "extinf": "#EXTINF:-1 tvg-name=\"凤凰卫视\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/Phoenix1.png\" group-title=\"卫视\",凤凰卫视",
-    "match": ["凤凰卫视", "凤凰中文", "凤凰中文台"]
-  },
-  {
-    "extinf": "#EXTINF:-1 tvg-name=\"凤凰资讯\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/Phoenix2.png\" group-title=\"卫视\",凤凰资讯",
-    "match": ["凤凰资讯", "凤凰资讯台"]
-  },
-  {
-    "extinf": "#EXTINF:-1 tvg-name=\"viutv\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/viutv.png\" group-title=\"卫视\",viutv",
-    "match": ["viutv", "ViuTV"]
-  },
   {
     "extinf": "#EXTINF:-1 tvg-name=\"湖南卫视\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/Hunan.png\" group-title=\"卫视\",湖南卫视",
     "match": ["湖南卫视"]
@@ -120,6 +100,28 @@
     "extinf": "#EXTINF:-1 tvg-name=\"江西卫视\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/Jiangxi.png\" group-title=\"卫视\",江西卫视",
     "match": ["江西卫视"]
   },
+  
+  {
+    "extinf": "#EXTINF:-1 tvg-name=\"翡翠台\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/TVB1.png\" group-title=\"港台\",TVB翡翠台",
+    "match": ["翡翠台", "TVB翡翠台", "TVB"]
+  },
+  {
+    "extinf": "#EXTINF:-1 tvg-name=\"娱乐台\" tvg-logo=\"https://logo.catvod.com/娱乐新闻台.png\" group-title=\"港台\",TVB娱乐台",
+    "match": ["娱乐台", "TVB娱乐台", "娱乐新闻台"]
+  },
+  {
+    "extinf": "#EXTINF:-1 tvg-name=\"凤凰卫视\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/Phoenix1.png\" group-title=\"港台\",凤凰卫视",
+    "match": ["凤凰卫视", "凤凰中文", "凤凰中文台"]
+  },
+  {
+    "extinf": "#EXTINF:-1 tvg-name=\"凤凰资讯\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/Phoenix2.png\" group-title=\"港台\",凤凰资讯",
+    "match": ["凤凰资讯", "凤凰资讯台"]
+  },
+  {
+    "extinf": "#EXTINF:-1 tvg-name=\"viutv\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/viutv.png\" group-title=\"港台\",viutv",
+    "match": ["viutv", "ViuTV"]
+  },
+  
   {
     "extinf": "#EXTINF:-1 tvg-name=\"11274154\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"剧集\",陈翔六点半",
     "match": ["11274154", "陈翔六点半"]
@@ -137,49 +139,67 @@
     "match": ["11342384", "新水浒", "水浒传"]
   },
   {
-    "extinf": "#EXTINF:-1 tvg-name=\"11342403\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"剧集\",倚天屠龙记",
-    "match": ["11342403", "倚天屠龙记"]
-  },
-  {
-    "extinf": "#EXTINF:-1 tvg-name=\"1352475619\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"剧集\",隋唐英雄传",
-    "match": ["1352475619", "隋唐英雄传"]
-  },
-  {
-    "extinf": "#EXTINF:-1 tvg-name=\"21059612\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"剧集\",风云雄霸天下",
-    "match": ["21059612", "风云雄霸天下"]
-  },
-  {
-    "extinf": "#EXTINF:-1 tvg-name=\"1382749903\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/歪歪.png\" group-title=\"剧集\",仙剑奇侠传",
-    "match": ["1382749903", "仙剑奇侠传"]
-  },
-  {
-    "extinf": "#EXTINF:-1 tvg-name=\"1382736838\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/歪歪.png\" group-title=\"剧集\",天下第一",
-    "match": ["1382736838", "天下第一"]
-  },
-  {
-    "extinf": "#EXTINF:-1 tvg-name=\"1351814644\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/歪歪.png\" group-title=\"剧集\",天龙八部",
-    "match": ["1351814644", "天龙八部"]
-  },
-  {
-    "extinf": "#EXTINF:-1 tvg-name=\"1382736806\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/歪歪.png\" group-title=\"剧集\",大江大河",
-    "match": ["1382736806", "大江大河"]
+    "extinf": "#EXTINF:-1 tvg-name=\"29465854\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/歪歪.png\" group-title=\"剧集\",楚汉骄雄",
+    "match": ["29465854", "楚汉骄雄"]
   },
   {
     "extinf": "#EXTINF:-1 tvg-name=\"30080146\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/歪歪.png\" group-title=\"剧集\",寻秦记",
     "match": ["30080146", "寻秦记"]
   },
   {
-    "extinf": "#EXTINF:-1 tvg-name=\"29465859\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/歪歪.png\" group-title=\"剧集\",西游记",
-    "match": ["29465859", "西游记"]
+    "extinf": "#EXTINF:-1 tvg-name=\"29465849\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"剧集\",封神榜
+    "match": ["29465849", "封神榜"]
   },
   {
-    "extinf": "#EXTINF:-1 tvg-name=\"11352960\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"剧集\",庆余年",
-    "match": ["11352960", "庆余年"]
+    "extinf": "#EXTINF:-1 tvg-name=\"29465860\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"剧集\",西游记Ⅰ
+    "match": ["29465860", "西游记Ⅰ"]
+  },
+  {
+    "extinf": "#EXTINF:-1 tvg-name=\"29465859\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"剧集\",西游记Ⅱ
+    "match": ["29465859", "西游记Ⅱ"]
+  },
+  {
+    "extinf": "#EXTINF:-1 tvg-name=\"11342403\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"剧集\",倚天屠龙记",
+    "match": ["11342403", "倚天屠龙记"]
+  },
+  {
+    "extinf": "#EXTINF:-1 tvg-name=\"1351814644\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/歪歪.png\" group-title=\"剧集\",天龙八部",
+    "match": ["1351814644", "天龙八部"]
+  },
+  {
+    "extinf": "#EXTINF:-1 tvg-name=\"21059612\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"剧集\",风云雄霸天下",
+    "match": ["21059612", "风云雄霸天下"]
+  },
+  {
+    "extinf": "#EXTINF:-1 tvg-name=\"1352475619\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"剧集\",隋唐英雄传",
+    "match": ["1352475619", "隋唐英雄传"]
+  },
+  {
+    "extinf": "#EXTINF:-1 tvg-name=\"1382749903\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/歪歪.png\" group-title=\"剧集\",仙剑奇侠传",
+    "match": ["1382749903", "仙剑奇侠传"]
+  },
+  {
+    "extinf": "#EXTINF:-1 tvg-name=\"29465850\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"剧集\",大唐双龙传",
+    "match": ["29465850", "大唐双龙传"]
+  },
+  {
+    "extinf": "#EXTINF:-1 tvg-name=\"1382736838\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/歪歪.png\" group-title=\"剧集\",天下第一",
+    "match": ["1382736838", "天下第一"]
+  },
+
+  {
+    "extinf": "#EXTINF:-1 tvg-name=\"1382736806\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/歪歪.png\" group-title=\"剧集\",大江大河",
+    "match": ["1382736806", "大江大河"]
   },
   {
     "extinf": "#EXTINF:-1 tvg-name=\"1354936244\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/歪歪.png\" group-title=\"剧集\",伪装者",
     "match": ["1354936244", "伪装者"]
   },
+  {
+    "extinf": "#EXTINF:-1 tvg-name=\"11352960\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"剧集\",庆余年",
+    "match": ["11352960", "庆余年"]
+  },
+
   {
     "extinf": "#EXTINF:-1 tvg-name=\"11342412\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"电影\",星爷",
     "match": ["11342412", "星爷", "周星驰"]
@@ -209,36 +229,25 @@
     "match": ["11352876", "黄渤"]
   },
   {
-    "extinf": "#EXTINF:-1 tvg-name=\"11342390\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"电影\",李连杰",
-    "match": ["11342390", "李连杰"]
-  },
-  {
     "extinf": "#EXTINF:-1 tvg-name=\"11352935\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"电影\",甄子丹",
     "match": ["11352935", "甄子丹"]
+  },
+  {
+    "extinf": "#EXTINF:-1 tvg-name=\"11342390\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"电影\",李连杰",
+    "match": ["11342390", "李连杰"]
   },
   {
     "extinf": "#EXTINF:-1 tvg-name=\"11282233\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"电影\",五福星",
     "match": ["11282233", "五福星"]
   },
   {
+    "extinf": "#EXTINF:-1 tvg-name=\"21969336\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"电影\",李子柒",
+    "match": ["21969336", "李子柒"]
+  },
+  
+  {
     "extinf": "#EXTINF:-1 tvg-name=\"11352879\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"动漫\",猫和老鼠",
     "match": ["11352879", "猫和老鼠"]
-  },
-  {
-    "extinf": "#EXTINF:-1 tvg-name=\"11601966\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"动漫\",七龙珠",
-    "match": ["11601966", "七龙珠", "龙珠"]
-  },
-  {
-    "extinf": "#EXTINF:-1 tvg-name=\"16913382\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"动漫\",海贼王",
-    "match": ["16913382", "海贼王", "航海王"]
-  },
-  {
-    "extinf": "#EXTINF:-1 tvg-name=\"1459675153\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/歪歪.png\" group-title=\"动漫\",火影忍者",
-    "match": ["1459675153", "火影"]
-  },
-  {
-    "extinf": "#EXTINF:-1 tvg-name=\"1382735626\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/歪歪.png\" group-title=\"动漫\",灌篮高手",
-    "match": ["1382735626", "灌篮高手"]
   },
   {
     "extinf": "#EXTINF:-1 tvg-name=\"11601963\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"动漫\",哆啦A梦",
@@ -251,6 +260,26 @@
   {
     "extinf": "#EXTINF:-1 tvg-name=\"11352919\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"动漫\",海绵宝宝",
     "match": ["11352919", "海绵宝宝"]
+  },
+  {
+    "extinf": "#EXTINF:-1 tvg-name=\"1382735626\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/歪歪.png\" group-title=\"动漫\",灌篮高手",
+    "match": ["1382735626", "灌篮高手"]
+  },
+  {
+    "extinf": "#EXTINF:-1 tvg-name=\"29465866\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"动漫\",火影忍者",
+    "match": ["29465866", "火影忍者", "1459675153"]
+  },
+  {
+    "extinf": "#EXTINF:-1 tvg-name=\"16913382\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"动漫\",海贼王",
+    "match": ["16913382", "海贼王", "航海王"]
+  },
+  {
+    "extinf": "#EXTINF:-1 tvg-name=\"11601966\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"动漫\",七龙珠",
+    "match": ["11601966", "七龙珠", "龙珠"]
+  },
+  {
+    "extinf": "#EXTINF:-1 tvg-name=\"21059614\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"动漫\",宫崎骏",
+    "match": ["21059614", "宫崎骏"]
   },
   {
     "extinf": "#EXTINF:-1 tvg-name=\"24257300\" tvg-logo=\"https://cdn.jsdelivr.net/gh/wanglindl/TVlogo@main/img/虎牙.png\" group-title=\"动漫\",中华小当家",
