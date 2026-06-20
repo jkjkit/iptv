@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<title>IPTV 源整理工具</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+*{box-sizing:border-box}
+body{margin:0;height:100vh;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#eef2f7;color:#1f2937}
+.topbar{height:68px;background:#fff;border-bottom:1px solid #dbe3ef;display:flex;align-items:center;gap:12px;padding:10px;overflow:hidden}
+.tool-block{display:flex;align-items:center;gap:8px;padding-right:12px;border-right:1px solid #e5e7eb}
+.tool-title{font-size:13px;color:#64748b;white-space:nowrap}
+.log-box{margin-left:auto;max-width:340px;font-size:12px;color:#475569;background:#f8fafc;border:1px solid #e5e7eb;border-radius:8px;padding:8px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+input,select{border:1px solid #cbd5e1;border-radius:8px;padding:9px 10px;font-size:13px;outline:none;background:#fff}
+button{border:none;background:#2563eb;color:white;padding:9px 12px;border-radius:8px;cursor:pointer;font-size:13px;white-space:nowrap}
+button:hover{background:#1d4ed8}
+button.green{background:#059669}.green:hover{background:#047857}
+button.gray{background:#64748b}.gray:hover{background:#475569}
+button.red{background:#dc2626}.red:hover{background:#b91c1c}
+button.icon{width:26px;height:24px;padding:0;border-radius:4px;background:transparent;color:#334155;font-size:15px;line-height:24px;text-align:center}
+button.icon:hover{background:#f1f5f9}
+button.icon.red-text{color:#dc2626}
+.layout{height:calc(100vh - 68px);display:grid;grid-template-columns:290px 220px 1fr;gap:10px;padding:10px}
+.panel{background:#fff;border:1px solid #dbe3ef;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;min-height:0}
+.panel-head{padding:10px 12px;border-bottom:1px solid #e5e7eb;font-weight:600;font-size:14px;background:#f8fafc}
+.panel-body{padding:10px;overflow:auto;flex:1}
+.full{width:100%;margin-bottom:8px}
+.hr{height:1px;background:#e5e7eb;margin:12px 0}
+.stat{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.stat div{background:#f1f5f9;padding:10px;border-radius:8px;font-size:12px}
+.stat b{display:block;color:#2563eb;font-size:20px}
+.group-item{padding:10px;border-radius:8px;cursor:pointer;margin-bottom:6px;background:#f8fafc;border:1px solid #e5e7eb;display:flex;justify-content:space-between;align-items:center}
+.group-item.active{background:#dbeafe;border-color:#2563eb;color:#1e40af}
+.group-item span{font-size:12px;background:#e2e8f0;border-radius:999px;padding:2px 7px}
+.channel{border:1px solid #e5e7eb;border-radius:10px;margin-bottom:8px;overflow:hidden;background:#fff}
+.channel-head{padding:8px 10px;background:#f8fafc;display:grid;grid-template-columns:auto 1fr 26px;gap:8px;align-items:center}
+.channel-title{font-weight:600;white-space:nowrap}
+.match-tags{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.tag{display:inline-block;background:#e0f2fe;color:#0369a1;padding:2px 6px;border-radius:999px;font-size:12px;margin-right:4px}
+.source{padding:4px 8px;border-top:1px solid #e5e7eb;display:grid;grid-template-columns:1fr 26px 26px;gap:6px;align-items:center}
+.inline-edit{padding:6px 8px;border-top:1px solid #e5e7eb;display:grid;grid-template-columns:1fr 52px 52px;gap:6px;align-items:center;background:#fcfcfd}
+.inline-edit input{width:100%;padding:7px 9px;font-family:Consolas,monospace;font-size:12px}
+.url{color:#2563eb;word-break:break-all;font-family:Consolas,monospace;font-size:12px;line-height:1.25}
+.empty{color:#94a3b8;font-size:13px;padding:7px 10px}
+mark{background:#fde68a;color:inherit;padding:0 2px;border-radius:3px}
+.modal-mask{position:fixed;inset:0;background:rgba(15,23,42,.45);display:none;align-items:center;justify-content:center;z-index:99}
+.modal{width:720px;max-height:80vh;background:#fff;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.modal-head{padding:12px 14px;font-weight:600;border-bottom:1px solid #e5e7eb;background:#f8fafc}
+.modal-body{padding:12px;overflow:auto}
+.modal-foot{padding:12px;border-top:1px solid #e5e7eb;text-align:right}
+.prefix-item{padding:9px 10px;border:1px solid #e5e7eb;background:#f8fafc;border-radius:8px;margin-bottom:8px;cursor:move;display:grid;grid-template-columns:1fr auto 26px;gap:8px;align-items:center}
+.prefix-item.dragging{opacity:.45}
+.prefix-url{font-family:Consolas,monospace;font-size:12px;word-break:break-all;color:#2563eb}
+.prefix-count{font-size:12px;color:#64748b}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="tool-block">
+    <span class="tool-title">搜索</span>
+    <select id="searchType" onchange="renderChannels()">
+      <option value="all">全部关键词</option>
+      <option value="source">直播源 URL</option>
+      <option value="program">节目名称</option>
+    </select>
+    <input id="searchInput" style="width:210px" placeholder="输入搜索内容" oninput="renderChannels()" />
+    <button class="gray" onclick="clearSearch()">清空搜索</button>
+  </div>
+
+  <div class="tool-block">
+    <span class="tool-title">查找替换</span>
+    <input id="findText" style="width:150px" placeholder="查找内容" />
+    <input id="replaceText" style="width:150px" placeholder="替换为" />
+    <button onclick="replaceInCurrentGroup()">替换当前分组</button>
+    <button class="gray" onclick="clearReplace()">清空</button>
+  </div>
+
+  <div class="tool-block">
+    <button class="gray" onclick="undoLastAction()">撤销上一步</button>
+    <button onclick="openPrefixSortModal()">批量排序/删除</button>
+  </div>
+
+  <div class="log-box" id="opLog">操作日志：就绪</div>
+</div>
+
+<div class="layout">
+  <div class="panel">
+    <div class="panel-head">操作</div>
+    <div class="panel-body">
+      <button class="full" onclick="loadProgramList()">加载节目列表</button>
+
+      <input id="placeholderUrl" class="full" value="http://127.0.0.1/tvg-name" />
+      <button class="full" onclick="addPlaceholderToCurrentGroup()">当前分组批量添加占位源</button>
+
+      <div class="hr"></div>
+
+      <input id="sourceFile" class="full" type="file" accept=".m3u,.m3u8,.txt" />
+      <button class="full" onclick="importLocalFile()">导入本地 M3U / TXT</button>
+
+      <input id="sourceUrl" class="full" placeholder="远程 M3U / TXT 地址" />
+      <button class="full" onclick="importRemoteSource()">导入远程源</button>
+
+      <div class="hr"></div>
+
+      <button class="full green" onclick="exportM3U()">导出 M3U</button>
+      <button class="full red" onclick="clearSources()">清空直播源</button>
+
+      <div class="hr"></div>
+
+      <div class="stat">
+        <div><b id="channelCount">0</b>节目</div>
+        <div><b id="sourceCount">0</b>源</div>
+        <div><b id="groupCount">0</b>分组</div>
+        <div><b id="visibleCount">0</b>当前显示</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">分组</div>
+    <div class="panel-body" id="groupList"></div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">节目列表</div>
+    <div class="panel-body" id="channelList"></div>
+  </div>
+</div>
+
+<div class="modal-mask" id="prefixModal">
+  <div class="modal">
+    <div class="modal-head" id="prefixModalTitle">批量排序 / 批量删除</div>
+    <div class="modal-body"><div id="prefixList"></div></div>
+    <div class="modal-foot">
+      <button class="gray" onclick="closePrefixSortModal()">取消</button>
+      <button onclick="applyPrefixSort()">应用排序</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const PROGRAM_JSON_URL="https://cdn.jsdelivr.net/gh/jkjkit/iptv@main/list.json";
+
+let channels=[];
+let currentGroup="全部";
+let visibleCount=0;
+let dragEl=null;
+let undoStack=[];
+let inlineAddChannelId=null;
+let editingSource=null;
+
+function log(msg){
+  document.getElementById("opLog").innerText="操作日志："+msg;
+}
+
+async function loadProgramList(){
+  try{
+    log("正在加载节目列表...");
+    const res=await fetch(PROGRAM_JSON_URL,{cache:"no-store"});
+    if(!res.ok)throw new Error("HTTP "+res.status);
+    const data=await res.json();
+
+    channels=normalizeJsonData(Array.isArray(data)?data:[]);
+    currentGroup="全部";
+    undoStack=[];
+    inlineAddChannelId=null;
+    editingSource=null;
+
+    renderAll();
+    log("节目列表加载完成："+channels.length+" 个节目");
+  }catch(e){
+    console.error(e);
+    log("节目列表加载失败");
+    alert("节目列表加载失败，请检查网络或跨域限制");
+  }
+}
+
+function normalizeJsonData(data){
+  return data.map((item,index)=>{
+    const extinf=item.extinf||"";
+    const name=getDisplayName(extinf)||getAttr(extinf,"tvg-name")||(item.match&&item.match[0])||"未命名节目";
+
+    return{
+      id:"ch_"+index,
+      name,
+      group:getAttr(extinf,"group-title")||"未分组",
+      logo:getAttr(extinf,"tvg-logo")||"",
+      extinf,
+      aliases:Array.isArray(item.match)?item.match:[],
+      sources:[]
+    };
+  });
+}
+
+function saveUndo(){
+  undoStack.push(JSON.stringify(channels));
+  if(undoStack.length>20)undoStack.shift();
+}
+
+function undoLastAction(){
+  if(!undoStack.length){
+    log("暂无可撤销操作");
+    return;
+  }
+
+  channels=JSON.parse(undoStack.pop());
+  inlineAddChannelId=null;
+  editingSource=null;
+  renderAll();
+  log("已撤销上一步操作");
+}
+
+function addPlaceholderToCurrentGroup(){
+  if(!channels.length)return alert("请先加载节目列表");
+  if(currentGroup==="全部"){
+    log("请先选择具体分组");
+    return;
+  }
+
+  const tpl=document.getElementById("placeholderUrl").value.trim();
+  if(!tpl){
+    log("请输入占位源地址");
+    return;
+  }
+
+  saveUndo();
+  let count=0;
+
+  channels.forEach(c=>{
+    if((c.group||"未分组")!==currentGroup)return;
+
+    const url=tpl
+      .replaceAll("tvg-name",encodeURIComponent(c.name))
+      .replaceAll("{tvg-name}",encodeURIComponent(c.name))
+      .replaceAll("[tvg-name]",encodeURIComponent(c.name));
+
+    if(!c.sources.some(s=>s.url===url)){
+      c.sources.push({name:c.name,displayName:c.name,group:c.group,logo:c.logo,url});
+      count++;
+    }
+  });
+
+  if(count===0)undoStack.pop();
+  renderAll();
+  log("批量添加占位源："+count+" 条");
+}
+
+function showAddSource(channelId){
+  inlineAddChannelId=channelId;
+  editingSource=null;
+  renderChannels();
+}
+
+function cancelInline(){
+  inlineAddChannelId=null;
+  editingSource=null;
+  renderChannels();
+}
+
+function saveInlineAdd(channelId){
+  const input=document.getElementById("add_"+channelId);
+  if(!input)return;
+
+  const url=input.value.trim();
+  if(!isUrl(url)){
+    log("URL 格式不正确");
+    return;
+  }
+
+  const c=channels.find(x=>x.id===channelId);
+  if(!c)return;
+
+  if(c.sources.some(s=>s.url===url)){
+    log("该直播源已存在");
+    return;
+  }
+
+  saveUndo();
+
+  c.sources.push({
+    name:c.name,
+    displayName:c.name,
+    group:c.group,
+    logo:c.logo,
+    url
+  });
+
+  inlineAddChannelId=null;
+  renderAll();
+  log("新增直播源成功");
+}
+
+function startEditSource(channelId,index){
+  editingSource={channelId,index};
+  inlineAddChannelId=null;
+  renderChannels();
+}
+
+function saveInlineEdit(channelId,index){
+  const input=document.getElementById("edit_"+channelId+"_"+index);
+  if(!input)return;
+
+  const url=input.value.trim();
+  if(!isUrl(url)){
+    log("URL 格式不正确");
+    return;
+  }
+
+  const c=channels.find(x=>x.id===channelId);
+  if(!c||!c.sources[index])return;
+
+  if(c.sources.some((s,i)=>i!==index&&s.url===url)){
+    log("该直播源已存在");
+    return;
+  }
+
+  if(c.sources[index].url!==url){
+    saveUndo();
+    c.sources[index].url=url;
+    log("修改直播源成功");
+  }else{
+    log("直播源未变化");
+  }
+
+  editingSource=null;
+  renderAll();
+}
+
+function removeSource(channelId,index){
+  const c=channels.find(x=>x.id===channelId);
+  if(!c||!c.sources[index])return;
+
+  saveUndo();
+  c.sources.splice(index,1);
+  renderAll();
+  log("已删除单条直播源");
+}
+
+function openPrefixSortModal(){
+  if(currentGroup==="全部"){
+    log("请先选择具体分组");
+    return;
+  }
+
+  const prefixMap=new Map();
+
+  getCurrentGroupChannels().forEach(c=>{
+    c.sources.forEach(s=>{
+      const prefix=getUrlPrefix(s.url);
+      prefixMap.set(prefix,(prefixMap.get(prefix)||0)+1);
+    });
+  });
+
+  if(!prefixMap.size){
+    log("当前分组没有直播源");
+    return;
+  }
+
+  document.getElementById("prefixModalTitle").innerText="批量排序 / 批量删除：当前分组【"+currentGroup+"】";
+
+  const list=document.getElementById("prefixList");
+  list.innerHTML="";
+
+  [...prefixMap.entries()].sort((a,b)=>b[1]-a[1]).forEach(([prefix,count])=>{
+    const div=document.createElement("div");
+    div.className="prefix-item";
+    div.draggable=true;
+    div.dataset.prefix=prefix;
+
+    div.innerHTML=`
+      <div class="prefix-url">${escapeHtml(prefix)}</div>
+      <div class="prefix-count">${count} 条</div>
+      <button class="icon red-text" onclick="batchDeletePrefix(event,'${encodeURIComponent(prefix)}')">❌</button>
+    `;
+
+    div.addEventListener("dragstart",()=>{dragEl=div;div.classList.add("dragging")});
+    div.addEventListener("dragend",()=>{dragEl=null;div.classList.remove("dragging")});
+    div.addEventListener("dragover",e=>{
+      e.preventDefault();
+      const box=document.getElementById("prefixList");
+      const after=getDragAfterElement(box,e.clientY);
+      if(!after)box.appendChild(dragEl);
+      else box.insertBefore(dragEl,after);
+    });
+
+    list.appendChild(div);
+  });
+
+  document.getElementById("prefixModal").style.display="flex";
+}
+
+function batchDeletePrefix(event,encodedPrefix){
+  event.stopPropagation();
+
+  const prefix=decodeURIComponent(encodedPrefix);
+  saveUndo();
+
+  let count=0;
+
+  getCurrentGroupChannels().forEach(c=>{
+    const before=c.sources.length;
+    c.sources=c.sources.filter(s=>getUrlPrefix(s.url)!==prefix);
+    count+=before-c.sources.length;
+  });
+
+  if(count===0){
+    undoStack.pop();
+    log("没有可删除的直播源");
+    return;
+  }
+
+  closePrefixSortModal();
+  renderAll();
+  log("批量删除完成："+count+" 条");
+}
+
+function closePrefixSortModal(){
+  document.getElementById("prefixModal").style.display="none";
+}
+
+function applyPrefixSort(){
+  const order=[...document.querySelectorAll(".prefix-item")].map(x=>x.dataset.prefix);
+  if(!order.length)return;
+
+  const weight=new Map(order.map((p,i)=>[p,i]));
+
+  saveUndo();
+
+  getCurrentGroupChannels().forEach(c=>{
+    c.sources.sort((a,b)=>{
+      const wa=weight.get(getUrlPrefix(a.url))??999999;
+      const wb=weight.get(getUrlPrefix(b.url))??999999;
+      return wa-wb;
+    });
+  });
+
+  closePrefixSortModal();
+  renderAll();
+  log("批量排序完成");
+}
+
+function getCurrentGroupChannels(){
+  return channels.filter(c=>(c.group||"未分组")===currentGroup);
+}
+
+function getUrlPrefix(url){
+  try{
+    const u=new URL(url);
+    const path=u.pathname||"/";
+    const idx=path.lastIndexOf("/");
+    const dir=idx>=0?path.slice(0,idx+1):"/";
+    return u.origin+dir;
+  }catch{
+    const i=String(url).lastIndexOf("/");
+    return i>=0?String(url).slice(0,i+1):String(url);
+  }
+}
+
+function getDragAfterElement(container,y){
+  const items=[...container.querySelectorAll(".prefix-item:not(.dragging)")];
+
+  return items.reduce((closest,child)=>{
+    const box=child.getBoundingClientRect();
+    const offset=y-box.top-box.height/2;
+
+    if(offset<0&&offset>closest.offset){
+      return{offset,element:child};
+    }
+
+    return closest;
+  },{offset:Number.NEGATIVE_INFINITY}).element;
+}
+
+function importLocalFile(){
+  if(!channels.length)return alert("请先加载节目列表");
+
+  const file=document.getElementById("sourceFile").files[0];
+  if(!file)return alert("请选择文件");
+
+  const reader=new FileReader();
+  reader.onload=e=>importSourceContent(e.target.result);
+  reader.readAsText(file,"utf-8");
+}
+
+async function importRemoteSource(){
+  if(!channels.length)return alert("请先加载节目列表");
+
+  const url=document.getElementById("sourceUrl").value.trim();
+  if(!url){
+    log("请输入远程源地址");
+    return;
+  }
+
+  try{
+    log("正在导入远程源...");
+    const res=await fetch(url);
+    if(!res.ok)throw new Error("HTTP "+res.status);
+    const text=await res.text();
+    importSourceContent(text);
+  }catch(e){
+    console.error(e);
+    log("远程源导入失败");
+    alert("远程源导入失败");
+  }
+}
+
+function importSourceContent(content){
+  const sources=detectSourceType(content)==="m3u"?parseM3U(content):parseTXT(content);
+
+  saveUndo();
+  const matchedCount=matchSourcesToChannels(sources);
+
+  if(matchedCount===0)undoStack.pop();
+
+  renderAll();
+  log("导入完成：解析 "+sources.length+" 条，匹配 "+matchedCount+" 条");
+}
+
+function detectSourceType(content){
+  return content.includes("#EXTINF")||content.includes("#EXTM3U")?"m3u":"txt";
+}
+
+function parseM3U(content){
+  const lines=content.split(/\r?\n/);
+  const sources=[];
+
+  let current={
+    extinf:"",
+    displayName:"",
+    tvgName:"",
+    group:"",
+    logo:""
+  };
+
+  for(const raw of lines){
+    const line=raw.trim();
+    if(!line)continue;
+
+    if(line.startsWith("#EXTINF")){
+      current.extinf=line;
+      current.displayName=getDisplayName(line);
+      current.tvgName=getAttr(line,"tvg-name");
+      current.group=getAttr(line,"group-title");
+      current.logo=getAttr(line,"tvg-logo");
+      continue;
+    }
+
+    if(line.startsWith("#"))continue;
+
+    if(isUrl(line)){
+      const name=current.tvgName||current.displayName||guessNameFromUrl(line);
+
+      sources.push({
+        name,
+        displayName:current.displayName||name,
+        group:current.group,
+        logo:current.logo,
+        url:line
+      });
+    }
+  }
+
+  return sources;
+}
+
+function parseTXT(content){
+  const lines=content.split(/\r?\n/);
+  const sources=[];
+  let group="";
+
+  for(const raw of lines){
+    const line=raw.trim();
+    if(!line)continue;
+
+    if(line.includes("#genre#")){
+      group=line.split(",")[0].trim();
+      continue;
+    }
+
+    const idx=line.indexOf(",");
+    if(idx===-1)continue;
+
+    const name=line.slice(0,idx).trim();
+    const url=line.slice(idx+1).trim();
+
+    if(!name||!isUrl(url))continue;
+
+    sources.push({name,displayName:name,group,logo:"",url});
+  }
+
+  return sources;
+}
+
+function matchSourcesToChannels(sources){
+  let matchedCount=0;
+
+  for(const source of sources){
+    const matched=matchChannel(source);
+    if(!matched)continue;
+
+    if(!matched.sources.some(s=>s.url===source.url)){
+      matched.sources.push(source);
+      matchedCount++;
+    }
+  }
+
+  return matchedCount;
+}
+
+function matchChannel(source){
+  const a=normalizeName(source.name);
+  const b=normalizeName(source.displayName);
+
+  return channels.find(channel=>{
+    const names=[channel.name,...(channel.aliases||[])];
+
+    return names.some(name=>{
+      const n=normalizeName(name);
+      return n===a||n===b;
+    });
+  });
+}
+
+function normalizeName(name){
+  return String(name||"")
+    .toLowerCase()
+    .replace(/\s+/g,"")
+    .replace(/高清|超清|蓝光|频道|hd|fhd|4k/g,"")
+    .replace(/[·\-_\(\)（）]/g,"");
+}
+
+function renderAll(){
+  renderGroups();
+  renderChannels();
+  updateStats();
+}
+
+function renderGroups(){
+  const box=document.getElementById("groupList");
+  box.innerHTML="";
+
+  const map=new Map();
+  map.set("全部",channels.length);
+
+  for(const c of channels){
+    const g=c.group||"未分组";
+    map.set(g,(map.get(g)||0)+1);
+  }
+
+  for(const [group,count] of map.entries()){
+    const div=document.createElement("div");
+    div.className="group-item"+(group===currentGroup?" active":"");
+    div.innerHTML=`<b>${escapeHtml(group)}</b><span>${count}</span>`;
+
+    div.onclick=()=>{
+      currentGroup=group;
+      inlineAddChannelId=null;
+      editingSource=null;
+      renderAll();
+    };
+
+    box.appendChild(div);
+  }
+}
+
+function renderChannels(){
+  const box=document.getElementById("channelList");
+  const keyword=document.getElementById("searchInput").value.trim();
+  const keywordLower=keyword.toLowerCase();
+  const searchType=document.getElementById("searchType").value;
+
+  box.innerHTML="";
+
+  const list=channels.filter(c=>{
+    if(currentGroup!=="全部"&&(c.group||"未分组")!==currentGroup)return false;
+    if(!keywordLower)return true;
+
+    if(searchType==="program"){
+      return [c.name,...(c.aliases||[])].join(" ").toLowerCase().includes(keywordLower);
+    }
+
+    if(searchType==="source"){
+      return c.sources.some(s=>String(s.url||"").toLowerCase().includes(keywordLower));
+    }
+
+    return [c.name,c.group,...(c.aliases||[]),...c.sources.map(s=>s.url)]
+      .join(" ")
+      .toLowerCase()
+      .includes(keywordLower);
+  });
+
+  visibleCount=list.length;
+
+  if(!list.length){
+    box.innerHTML=`<div class="empty">暂无数据</div>`;
+    updateStats();
+    return;
+  }
+
+  for(const c of list){
+    const div=document.createElement("div");
+    div.className="channel";
+
+    const tags=(c.aliases||[])
+      .map(x=>`<span class="tag">${highlightText(x,keyword)}</span>`)
+      .join("");
+
+    let html=`
+      <div class="channel-head">
+        <div class="channel-title">${highlightText(c.name,keyword)}</div>
+        <div class="match-tags">${tags}</div>
+        <button class="icon" onclick="showAddSource('${c.id}')">➕</button>
+      </div>
+    `;
+
+    if(inlineAddChannelId===c.id){
+      html+=`
+        <div class="inline-edit">
+          <input id="add_${c.id}" placeholder="输入直播源 URL，回车保存" onkeydown="if(event.key==='Enter')saveInlineAdd('${c.id}')" />
+          <button onclick="saveInlineAdd('${c.id}')">保存</button>
+          <button class="gray" onclick="cancelInline()">取消</button>
+        </div>
+      `;
+    }
+
+    if(c.sources.length){
+      html+=c.sources.map((s,i)=>{
+        const isEditing=editingSource&&editingSource.channelId===c.id&&editingSource.index===i;
+
+        if(isEditing){
+          return `
+            <div class="inline-edit">
+              <input id="edit_${c.id}_${i}" value="${escapeInputValue(s.url)}" onkeydown="if(event.key==='Enter')saveInlineEdit('${c.id}',${i})" />
+              <button onclick="saveInlineEdit('${c.id}',${i})">保存</button>
+              <button class="gray" onclick="cancelInline()">取消</button>
+            </div>
+          `;
+        }
+
+        return `
+          <div class="source">
+            <div class="url">${highlightText(s.url,keyword)}</div>
+            <button class="icon" onclick="startEditSource('${c.id}',${i})">✏️</button>
+            <button class="icon red-text" onclick="removeSource('${c.id}',${i})">➖</button>
+          </div>
+        `;
+      }).join("");
+    }else{
+      html+=`<div class="empty">暂无直播源</div>`;
+    }
+
+    div.innerHTML=html;
+    box.appendChild(div);
+  }
+
+  setTimeout(()=>{
+    const el=document.querySelector(".inline-edit input");
+    if(el){
+      el.focus();
+      el.selectionStart=el.selectionEnd=el.value.length;
+    }
+  },0);
+
+  updateStats();
+}
+
+function replaceInCurrentGroup(){
+  if(currentGroup==="全部"){
+    log("请先选择具体分组");
+    return;
+  }
+
+  const find=document.getElementById("findText").value;
+  const replace=document.getElementById("replaceText").value;
+
+  if(!find){
+    log("请输入查找内容");
+    return;
+  }
+
+  saveUndo();
+  let count=0;
+
+  for(const c of channels){
+    if((c.group||"未分组")!==currentGroup)continue;
+
+    for(const s of c.sources){
+      const oldUrl=String(s.url||"");
+      const newUrl=oldUrl.replaceAll(find,replace);
+
+      if(oldUrl!==newUrl){
+        s.url=newUrl;
+        count++;
+      }
+    }
+  }
+
+  if(count===0)undoStack.pop();
+
+  renderAll();
+  log("替换完成："+count+" 条");
+}
+
+function clearSearch(){
+  document.getElementById("searchInput").value="";
+  renderChannels();
+  log("已清空搜索");
+}
+
+function clearReplace(){
+  document.getElementById("findText").value="";
+  document.getElementById("replaceText").value="";
+  log("已清空查找替换");
+}
+
+function clearSources(){
+  if(!confirm("确定清空所有已匹配直播源？"))return;
+
+  saveUndo();
+  channels.forEach(c=>c.sources=[]);
+  renderAll();
+  log("已清空全部直播源");
+}
+
+/* 优化后的导出格式：一个频道一个 EXTINF，下面多条源 */
+function exportM3U(){
+  let text='#EXTM3U x-tvg-url="https://epg.zsdc.eu.org/t.xml"\n\n';
+  let channelCount=0;
+  let sourceCount=0;
+
+  for(const c of channels){
+    if(!c.sources.length)continue;
+
+    text+=makeExtinf(c,c.sources[0])+"\n";
+
+    for(const s of c.sources){
+      text+=s.url+"\n";
+      sourceCount++;
+    }
+
+    text+="\n";
+    channelCount++;
+  }
+
+  const blob=new Blob([text],{type:"text/plain;charset=utf-8"});
+  downloadBlob(blob,"result.m3u");
+
+  log("导出完成：节目 "+channelCount+" 个，直播源 "+sourceCount+" 条");
+}
+
+function makeExtinf(channel,source){
+  const logo=channel.logo||source.logo||"";
+  const group=channel.group||source.group||"";
+  const name=channel.name||source.name||"";
+
+  return '#EXTINF:-1 tvg-name="'+escapeAttr(name)+'" tvg-logo="'+escapeAttr(logo)+'" group-title="'+escapeAttr(group)+'",'+name;
+}
+
+function updateStats(){
+  const groups=new Set(channels.map(c=>c.group||"未分组"));
+  const sourceCount=channels.reduce((sum,c)=>sum+c.sources.length,0);
+
+  document.getElementById("channelCount").innerText=channels.length;
+  document.getElementById("sourceCount").innerText=sourceCount;
+  document.getElementById("groupCount").innerText=groups.size;
+  document.getElementById("visibleCount").innerText=visibleCount;
+}
+
+function getDisplayName(extinf){
+  const idx=String(extinf||"").lastIndexOf(",");
+  if(idx===-1)return "";
+  return extinf.slice(idx+1).trim();
+}
+
+function getAttr(text,key){
+  const str=String(text||"");
+  const reg1=new RegExp(key+'="([^"]*)"',"i");
+  const reg2=new RegExp(key+"='([^']*)'","i");
+  return str.match(reg1)?.[1]||str.match(reg2)?.[1]||"";
+}
+
+function guessNameFromUrl(url){
+  try{
+    const u=new URL(url);
+    const last=u.pathname.split("/").filter(Boolean).pop()||"";
+    return last.replace(/\.(m3u8?|ts|flv|mp4)$/i,"")||"未知节目";
+  }catch{
+    return "未知节目";
+  }
+}
+
+function isUrl(text){
+  return /^(https?|rtmp|rtsp):\/\//i.test(String(text||"").trim());
+}
+
+function downloadBlob(blob,filename){
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download=filename;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function highlightText(text,keyword){
+  const safe=escapeHtml(text);
+  if(!keyword)return safe;
+
+  const reg=new RegExp(keyword.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),"ig");
+  return safe.replace(reg,match=>`<mark>${match}</mark>`);
+}
+
+function escapeHtml(str){
+  return String(str||"")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+function escapeInputValue(str){
+  return escapeHtml(str);
+}
+
+function escapeAttr(str){
+  return String(str||"").replaceAll('"',"'");
+}
+
+renderAll();
+</script>
+
+</body>
+</html>
